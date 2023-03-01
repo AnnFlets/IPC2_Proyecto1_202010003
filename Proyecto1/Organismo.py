@@ -18,7 +18,7 @@ class Organismo:
         self.columna = columna
 
     def getColor(self):
-        return self.Color
+        return self.color
 
     def setColor(self, color):
         self.color = color
