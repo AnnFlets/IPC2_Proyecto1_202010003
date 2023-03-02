@@ -6,9 +6,10 @@ from ListaOrganismo import ListaOrganismo
 from NodoOrganismo import NodoOrganismo
 from DatoOrganismo import DatoOrganismo
 
-#from ListaMuestra import ListaMuestra
-#from NodoMuestra import NodoMuestra
-#from Organismo import Organismo
+from ListaMuestras import ListaMuestras
+from ListaMuestra import ListaMuestra
+from NodoMuestra import NodoMuestra
+from Organismo import Organismo
 
 # LECTURA DE XML
 try:
@@ -35,9 +36,9 @@ try:
             miListaOrganismo.push(codigoOrganismo, nombreOrganismo, listaColores[contador])
             contador = contador + 1
 
-    # Lista general
-    #miListaGeneral2 = ListaGeneral()
-    """
+    # Lista que contendrá la información de las muestras y los organismos vivos
+    miListaMuestras = ListaMuestras()
+
     # Lista con los datos de las muestras de los organismos
     for listadoMuestra in listadoMuestras:
         muestras = listadoMuestra.getElementsByTagName("muestra")
@@ -54,10 +55,11 @@ try:
                     filaOrganismo = int(celdaViva.getElementsByTagName("fila")[0].firstChild.data)
                     columnaOrganismo = int(celdaViva.getElementsByTagName("columna")[0].firstChild.data)
                     codigoOrganismo = celdaViva.getElementsByTagName("codigoOrganismo")[0].firstChild.data
-                    organismoNuevo = Organismo(filaOrganismo, columnaOrganismo, codigoOrganismo, "RED", "Black")
-                    nodoNuevo = NodoOrganismo(organismoNuevo)
-                    listaMuestraNueva.push(nodoNuevo)
-            #miListaGeneral2.push(listaMuestraNueva)
-    """
+                    colorOrganismo = miListaOrganismo.devolverColor(codigoOrganismo)
+                    listaMuestraNueva.push(filaOrganismo, columnaOrganismo, codigoOrganismo, colorOrganismo, "BLACK")
+            miListaMuestras.push(listaMuestraNueva)
+
+    miListaMuestras.imprimirLimites()
+    miListaMuestras.imprimirInfoMuestras()
 except:
     print("[ERROR]: Archivo no encontrado")

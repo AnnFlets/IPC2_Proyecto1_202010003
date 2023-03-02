@@ -1,4 +1,4 @@
-from NodoOrganismo import NodoOrganismo
+from NodoMuestra import NodoMuestra
 
 class ListaMuestra:
 
@@ -53,8 +53,8 @@ class ListaMuestra:
     def setSiguiente(self, siguiente):
         self.siguiente = siguiente
 
-    def push(self, organismo):
-        nodoTemporal = Nodo(organismo)
+    def push(self, fila, columna, codigo, color, borde):
+        nodoTemporal = NodoMuestra(fila, columna, codigo, color, borde)
         if self.cabeza == None:
             self.cabeza = nodoTemporal
             self.cola = nodoTemporal

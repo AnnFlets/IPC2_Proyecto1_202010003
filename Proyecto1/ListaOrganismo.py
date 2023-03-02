@@ -26,3 +26,10 @@ class ListaOrganismo:
         else:
             self.cola.setSiguiente(nodoTemporal)
             self.cola = nodoTemporal
+
+    def devolverColor(self, codigo):
+        auxiliar = self.cabeza
+        while auxiliar != None:
+            if auxiliar.getCodigo() == codigo:
+                return auxiliar.getColor()
+            auxiliar = auxiliar.getSiguiente()
