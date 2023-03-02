@@ -1,7 +1,8 @@
 class Organismo:
-    def __init__(self, fila, columna, color, borde):
+    def __init__(self, fila, columna, codigo, color, borde):
         self.fila = fila
         self.columna = columna
+        self.codigo = codigo
         self.color = color
         self.borde = borde
 
@@ -16,6 +17,12 @@ class Organismo:
 
     def setColumna(self, columna):
         self.columna = columna
+
+    def getCodigo(self):
+        return self.codigo
+
+    def setCodigo(self, codigo):
+        self.codigo = codigo
 
     def getColor(self):
         return self.color

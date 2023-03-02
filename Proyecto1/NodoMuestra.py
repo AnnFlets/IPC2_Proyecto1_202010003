@@ -1,4 +1,4 @@
-class Nodo:
+class NodoMuestra:
     def __init__(self, organismo):
         self.organismo = organismo
         self.siguiente = None
