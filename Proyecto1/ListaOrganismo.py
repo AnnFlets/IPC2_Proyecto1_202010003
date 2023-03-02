@@ -33,3 +33,12 @@ class ListaOrganismo:
             if auxiliar.getCodigo() == codigo:
                 return auxiliar.getColor()
             auxiliar = auxiliar.getSiguiente()
+
+    def imprimirTiposOrganismos(self):
+        auxiliar = self.cabeza
+        while auxiliar != None:
+            print("Código: " + str(auxiliar.getCodigo()))
+            print("Nombre: " + str(auxiliar.getNombre()))
+            print("Color: " + str(auxiliar.getColor()))
+            print("-----------------------------------------------------")
+            auxiliar = auxiliar.getSiguiente()

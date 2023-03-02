@@ -21,7 +21,7 @@ try:
     listaOrganismos = xml.getElementsByTagName("listaOrganismos")
     listadoMuestras = xml.getElementsByTagName("listadoMuestras")
 
-    listaColores=["Pink", "Green", "Blue", "Red"]
+    listaColores=["Pink", "Green", "Blue", "Red", "Yellow", "Orange", "Purple", "Brown", "Gray"]
     contador = 0
 
     # Lista que contendrá la información de los tipos de organismos existentes
@@ -59,7 +59,9 @@ try:
                     listaMuestraNueva.push(filaOrganismo, columnaOrganismo, codigoOrganismo, colorOrganismo, "BLACK")
             miListaMuestras.push(listaMuestraNueva)
 
-    miListaMuestras.imprimirLimites()
-    miListaMuestras.imprimirInfoMuestras()
+    miListaOrganismo.imprimirTiposOrganismos()
+    miListaMuestras.imprimirLimitesCuadricula()
+    miListaMuestras.imprimirInformacionMuestras()
+
 except:
-    print("[ERROR]: Archivo no encontrado")
+    print("[ERROR]: Existen problemas con el archivo")

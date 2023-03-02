@@ -45,15 +45,20 @@ class ListaMuestras:
             self.cola = lista
 
 
-    def imprimirLimites(self):
-        print("Límite filas: " + str(self.limiteFilas))
-        print("Limite columnas: " + str(self.limiteColumnas))
+    def imprimirLimitesCuadricula(self):
+        print("----------- TAMAÑO TABLERO -----------")
+        print("*** Límite filas: " + str(self.limiteFilas))
+        print("*** Limite columnas: " + str(self.limiteColumnas) + "\n")
 
-    def imprimirInfoMuestras(self):
+    def imprimirInformacionMuestras(self):
         auxiliar = self.cabeza
         while auxiliar != None:
+            print("---------- MUESTRA ----------")
             print("Código: " + str(auxiliar.getCodigo()))
             print("Descripción: " + str(auxiliar.getDescripcion()))
             print("Límite filas: " + str(auxiliar.getLimiteFilas()))
             print("Limite columnas: " + str(auxiliar.getLimiteColumnas()))
+            print("__________ Organismos __________")
+            auxiliar.imprimirPosicionOrganismo()
+            print("")
             auxiliar = auxiliar.getSiguiente()

@@ -65,6 +65,6 @@ class ListaMuestra:
     def imprimirPosicionOrganismo(self):
         nodoTemporal = self.cabeza
         while nodoTemporal != None:
-            print("Fila: " + str(nodoTemporal.getOrganismo().getFila()))
-            print("Columna: " + str(nodoTemporal.getOrganismo().getColumna()))
+            print("Fila: " + str(nodoTemporal.getFila()))
+            print("Columna: " + str(nodoTemporal.getColumna()))
             nodoTemporal = nodoTemporal.getSiguiente()
