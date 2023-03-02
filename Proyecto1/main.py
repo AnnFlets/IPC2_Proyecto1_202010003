@@ -23,10 +23,10 @@ try:
     listaColores=["Pink", "Green", "Blue", "Red"]
     contador = 0
 
-    # Lista general
+    # Lista que contendrá la información de los tipos de organismos existentes
     miListaOrganismo = ListaOrganismo()
 
-    # Lista de organismos existentes
+    # Se obtienen los valores de los atributos para almacenarlos en la lista de organismos
     for listaOrganismo in listaOrganismos:
         organismos = listaOrganismo.getElementsByTagName("organismo")
         for organismo in organismos:

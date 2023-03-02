@@ -1,6 +1,7 @@
 from DatoOrganismo import DatoOrganismo
 
 class NodoOrganismo:
+
     def __init__(self, codigo, nombre, color):
         self.datoOrganismo = DatoOrganismo(codigo, nombre, color)
         self.siguiente = None
