@@ -52,8 +52,8 @@ while menuPrincipal:
                     miOrganismo = miListaOrganismo.devolverOrganismo(numeroOrganismo)
                     if miOrganismo != None:
                         print("Organismo seleccionado: " + str(miOrganismo.getCodigo() + " - " + str(miOrganismo.getNombre())))
-                        #miMuestra.buscarCeldasAptasHorizonal(miOrganismo.getCodigo())
-                        #miMuestra.buscarCeldasAptasVertical(miOrganismo.getCodigo())
+                        miMuestra.buscarCeldasAptasHorizonal(miOrganismo.getCodigo())
+                        miMuestra.buscarCeldasAptasVertical(miOrganismo.getCodigo())
                         miMuestra.buscarCeldasAptasDiagonal(miOrganismo.getCodigo())
                     else:
                         print("La opción ingresada no existe")
