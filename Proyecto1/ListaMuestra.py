@@ -196,32 +196,139 @@ class ListaMuestra:
     def buscarCeldasAptasDiagonal(self, codigo):
         auxiliar = self.cabeza
         while auxiliar != None:
-            fila = auxiliar.getFila()
-            columna = auxiliar.getColumna()
-            if self.buscarOrganismo(fila + 1, columna + 1, codigo):
-                print("Auxiliar en:\nFila: " + str(fila) + " Columna: " + str(columna) +
-                      "\nPuede Comer Ficha en Fila: " + str(fila + 1) + " Columna: " + str(columna + 1))
-                #if (Fila + 2 < self.LimiteVertical and Columna + 2 < self.LimiteHorizontal):
-                    #FichasContrarias.EliminarPosicion(Fila + 1, Columna + 1)
-                    #self.MoverAuxiliar(Auxiliar, Fila + 2, Columna + 2)
-            elif self.buscarOrganismo(fila - 1, columna + 1, codigo):
-                print("Auxiliar en:\nFila: " + str(fila) + " Columna: " + str(columna) +
-                      "\nPuede Comer Ficha en Fila: " + str(fila - 1) + " Columna: " + str(columna + 1))
-                #if (Fila - 2 >= 0 and Columna + 2 < self.LimiteHorizontal):
-                    #FichasContrarias.EliminarPosicion(Fila - 1, Columna + 1)
-                    #self.MoverAuxiliar(Auxiliar, Fila - 2, Columna + 2)
-            elif self.buscarOrganismo(fila - 1, columna - 1, codigo):
-                print("Auxiliar en:\nFila: " + str(fila) + " Columna: " + str(columna) +
-                      "\nPuede Comer Ficha en Fila: " + str(fila - 1) + " Columna: " + str(columna - 1))
-                #if (Fila - 2 >= 0 and Columna - 2 >= 0):
-                    #FichasContrarias.EliminarPosicion(Fila - 1, Columna - 1)
-                    #self.MoverAuxiliar(Auxiliar, Fila - 2, Columna - 2)
-            elif self.buscarOrganismo(fila + 1, columna - 1, codigo):
-                print("Auxiliar en:\nFila: " + str(fila) + " Columna: " + str(columna) +
-                      "\nPuede Comer Ficha en Fila: " + str(fila + 1) + " Columna: " + str(columna - 1))
-                #if (Fila + 2 < self.LimiteVertical and Columna - 2 >= 0):
-                    #FichasContrarias.EliminarPosicion(Fila + 1, Columna - 1)
-                    #self.MoverAuxiliar(Auxiliar, Fila + 2, Columna - 2)
+            if auxiliar.getCodigo() == codigo:
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
+                if self.buscarOrganismo(fila + 1, columna + 1, codigo) == 0:
+                    fila = auxiliar.getFila()
+                    columna = auxiliar.getColumna()
+                    fila = fila + 1
+                    columna = columna + 1
+                    contadorFila = fila
+                    contadorColumna = columna
+                    while (contadorFila <= self.getLimiteFilas() and contadorColumna <= self.getLimiteColumnas()):
+                        if self.buscarOrganismo(contadorFila + 1, contadorColumna + 1, codigo) == 2:
+                            comer = True
+                            break
+                        elif self.buscarOrganismo(contadorFila + 1, contadorColumna + 1, codigo) == 1:
+                            break
+                        elif self.buscarOrganismo(contadorFila + 1, contadorColumna + 1, codigo) == 0:
+                            pass
+                        contadorFila = contadorFila + 1
+                        contadorColumna = contadorColumna + 1
+                    if comer == True:
+                        print("Auxiliar en:\nFila: " + str(fila - 1) + " Columna: " + str(columna - 1))
+                        print("Puede Comer Ficha en Fila: " + str(fila) + " Columna: " + str(columna))
+                        filaCeldaApta = fila + 1
+                        columnaCeldaApta = columna + 1
+                        while (self.buscarOrganismo(fila + 1, columna + 1, codigo) == 0):
+                            print("\nPuede Comer Ficha en Fila: " + str(fila + 1) + " Columna: " + str(columna + 1))
+                            filaCeldaApta = filaCeldaApta + 1
+                            columnaCeldaApta = columnaCeldaApta + 1
+                            fila = fila + 1
+                            columna = columna + 1
+                        print("Celda apta (VERDE) -> fila: " + str(filaCeldaApta) + " - columna: " + str(columnaCeldaApta))
+                    print("--------------------------------------------------")
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
+                if self.buscarOrganismo(fila + 1, columna - 1, codigo) == 0:
+                    fila = auxiliar.getFila()
+                    columna = auxiliar.getColumna()
+                    fila = fila + 1
+                    columna = columna - 1
+                    contadorFila = fila
+                    contadorColumna = columna
+                    while (contadorFila <= self.getLimiteFilas() and contadorColumna >= 0):
+                        if self.buscarOrganismo(contadorFila + 1, contadorColumna - 1, codigo) == 2:
+                            comer = True
+                            break
+                        elif self.buscarOrganismo(contadorFila + 1, contadorColumna - 1, codigo) == 1:
+                            break
+                        elif self.buscarOrganismo(contadorFila + 1, contadorColumna - 1, codigo) == 0:
+                            pass
+                        contadorFila = contadorFila + 1
+                        contadorColumna = contadorColumna - 1
+                    if comer == True:
+                        print("Auxiliar en:\nFila: " + str(fila - 1) + " Columna: " + str(columna + 1))
+                        print("Puede Comer Ficha en Fila: " + str(fila) + " Columna: " + str(columna))
+                        filaCeldaApta = fila + 1
+                        columnaCeldaApta = columna - 1
+                        while (self.buscarOrganismo(fila + 1, columna - 1, codigo) == 0):
+                            print("\nPuede Comer Ficha en Fila: " + str(fila + 1) + " Columna: " + str(columna - 1))
+                            filaCeldaApta = filaCeldaApta + 1
+                            columnaCeldaApta = columnaCeldaApta - 1
+                            fila = fila + 1
+                            columna = columna - 1
+                        print("Celda apta (VERDE) -> fila: " + str(filaCeldaApta) + " - columna: " + str(columnaCeldaApta))
+                    print("--------------------------------------------------")
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
+                if self.buscarOrganismo(fila - 1, columna + 1, codigo) == 0:
+                    fila = auxiliar.getFila()
+                    columna = auxiliar.getColumna()
+                    fila = fila - 1
+                    columna = columna + 1
+                    contadorFila = fila
+                    contadorColumna = columna
+                    while (contadorFila >= 0 and contadorColumna <= self.getLimiteColumnas()):
+                        if self.buscarOrganismo(contadorFila - 1, contadorColumna + 1, codigo) == 2:
+                            comer = True
+                            break
+                        elif self.buscarOrganismo(contadorFila - 1, contadorColumna + 1, codigo) == 1:
+                            break
+                        elif self.buscarOrganismo(contadorFila - 1, contadorColumna + 1, codigo) == 0:
+                            pass
+                        contadorFila = contadorFila - 1
+                        contadorColumna = contadorColumna + 1
+                    if comer == True:
+                        print("Auxiliar en:\nFila: " + str(fila + 1) + " Columna: " + str(columna - 1))
+                        print("Puede Comer Ficha en Fila: " + str(fila) + " Columna: " + str(columna))
+                        filaCeldaApta = fila - 1
+                        columnaCeldaApta = columna + 1
+                        while (self.buscarOrganismo(fila - 1, columna + 1, codigo) == 0):
+                            print("\nPuede Comer Ficha en Fila: " + str(fila - 1) + " Columna: " + str(columna + 1))
+                            filaCeldaApta = filaCeldaApta - 1
+                            columnaCeldaApta = columnaCeldaApta + 1
+                            fila = fila - 1
+                            columna = columna + 1
+                        print("Celda apta (VERDE) -> fila: " + str(filaCeldaApta) + " - columna: " + str(columnaCeldaApta))
+                    print("--------------------------------------------------")
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
+                if self.buscarOrganismo(fila - 1, columna - 1, codigo) == 0:
+                    fila = auxiliar.getFila()
+                    columna = auxiliar.getColumna()
+                    fila = fila - 1
+                    columna = columna - 1
+                    contadorFila = fila
+                    contadorColumna = columna
+                    while (contadorFila >= 0 and contadorColumna >= 0):
+                        if self.buscarOrganismo(contadorFila - 1, contadorColumna - 1, codigo) == 2:
+                            comer = True
+                            break
+                        elif self.buscarOrganismo(contadorFila - 1, contadorColumna - 1, codigo) == 1:
+                            break
+                        elif self.buscarOrganismo(contadorFila - 1, contadorColumna - 1, codigo) == 0:
+                            pass
+                        contadorFila = contadorFila - 1
+                        contadorColumna = contadorColumna - 1
+                    if comer == True:
+                        print("Auxiliar en:\nFila: " + str(fila + 1) + " Columna: " + str(columna + 1))
+                        print("Puede Comer Ficha en Fila: " + str(fila) + " Columna: " + str(columna))
+                        filaCeldaApta = fila - 1
+                        columnaCeldaApta = columna - 1
+                        while (self.buscarOrganismo(fila - 1, columna - 1, codigo) == 0):
+                            print("\nPuede Comer Ficha en Fila: " + str(fila - 1) + " Columna: " + str(columna - 1))
+                            filaCeldaApta = filaCeldaApta - 1
+                            columnaCeldaApta = columnaCeldaApta - 1
+                            fila = fila - 1
+                            columna = columna - 1
+                        print("Celda apta (VERDE) -> fila: " + str(filaCeldaApta) + " - columna: " + str(columnaCeldaApta))
+                    print("--------------------------------------------------")
             auxiliar = auxiliar.getSiguiente()
     def imprimirPosicionOrganismo(self):
         nodoTemporal = self.cabeza

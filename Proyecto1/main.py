@@ -53,7 +53,8 @@ while menuPrincipal:
                     if miOrganismo != None:
                         print("Organismo seleccionado: " + str(miOrganismo.getCodigo() + " - " + str(miOrganismo.getNombre())))
                         #miMuestra.buscarCeldasAptasHorizonal(miOrganismo.getCodigo())
-                        miMuestra.buscarCeldasAptasVertical(miOrganismo.getCodigo())
+                        #miMuestra.buscarCeldasAptasVertical(miOrganismo.getCodigo())
+                        miMuestra.buscarCeldasAptasDiagonal(miOrganismo.getCodigo())
                     else:
                         print("La opción ingresada no existe")
                 elif opcionMenuSecundario == 3:
