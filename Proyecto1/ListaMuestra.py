@@ -104,6 +104,9 @@ class ListaMuestra:
                             columna = columna + 1
                         print("Celda apta (VERDE) -> fila: " + str(fila) + " - columna: " + str(columnaCeldaApta))
                     print("--------------------------------------------------")
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
                 if self.buscarOrganismo(fila, columna - 1, codigo) == 0:
                     fila = auxiliar.getFila()
                     columna = auxiliar.getColumna()
@@ -161,6 +164,9 @@ class ListaMuestra:
                             fila = fila + 1
                         print("Celda apta (VERDE) -> fila: " + str(filaCeldaApta) + " - columna: " + str(columna))
                     print("--------------------------------------------------")
+                fila = auxiliar.getFila()
+                columna = auxiliar.getColumna()
+                comer = False
                 if self.buscarOrganismo(fila - 1, columna, codigo) == 0:
                     fila = auxiliar.getFila()
                     columna = auxiliar.getColumna()
