@@ -44,7 +44,6 @@ class ListaMuestras:
             self.cola.setSiguiente(lista)
             self.cola = lista
 
-
     def imprimirLimitesCuadricula(self):
         print("----------- TAMAÑO TABLERO -----------")
         print("*** Límite filas: " + str(self.limiteFilas))
@@ -53,12 +52,20 @@ class ListaMuestras:
     def imprimirInformacionMuestras(self):
         auxiliar = self.cabeza
         while auxiliar != None:
-            print("---------- MUESTRA ----------")
-            print("Código: " + str(auxiliar.getCodigo()))
-            print("Descripción: " + str(auxiliar.getDescripcion()))
-            print("Límite filas: " + str(auxiliar.getLimiteFilas()))
-            print("Limite columnas: " + str(auxiliar.getLimiteColumnas()))
-            print("__________ Organismos __________")
-            auxiliar.imprimirPosicionOrganismo()
-            print("")
+            print("MUESTRA")
+            print("\t* Código: " + str(auxiliar.getCodigo()))
+            print("\t* Descripción: " + str(auxiliar.getDescripcion()))
+            print("\t* Límite filas: " + str(auxiliar.getLimiteFilas()))
+            print("\t* Limite columnas: " + str(auxiliar.getLimiteColumnas()) + "\n")
+            #print("__________ Organismos __________")
+            #auxiliar.imprimirPosicionOrganismo()
+            #print("")
             auxiliar = auxiliar.getSiguiente()
+
+    def devolverMuestra(self, codigo):
+        auxiliar = self.cabeza
+        while auxiliar != None:
+            if auxiliar.getCodigo() == codigo:
+                return auxiliar
+            auxiliar = auxiliar.getSiguiente()
+        return None

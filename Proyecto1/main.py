@@ -1,7 +1,5 @@
-#Librería utilizada para la lectura del archivo XML
-import xml.dom.minidom as MD
-
-#TDA
+from Lectura import leerArchivoXML
+# TDA
 from ListaOrganismo import ListaOrganismo
 from NodoOrganismo import NodoOrganismo
 from DatoOrganismo import DatoOrganismo
@@ -11,57 +9,62 @@ from ListaMuestra import ListaMuestra
 from NodoMuestra import NodoMuestra
 from Organismo import Organismo
 
-# LECTURA DE XML
-try:
-    ruta = input("Ingrese la ruta del archivo XML a leer:")
-    # Se lee el archivo
-    xml = MD.parse(ruta)
+menuPrincipal = True
+miListaOrganismo = ListaOrganismo()
+miListaMuestras = ListaMuestras()
 
-    datosMarte = xml.getElementsByTagName("datosMarte")
-    listaOrganismos = xml.getElementsByTagName("listaOrganismos")
-    listadoMuestras = xml.getElementsByTagName("listadoMuestras")
-
-    listaColores=["Pink", "Green", "Blue", "Red", "Yellow", "Orange", "Purple", "Brown", "Gray"]
-    contador = 0
-
-    # Lista que contendrá la información de los tipos de organismos existentes
-    miListaOrganismo = ListaOrganismo()
-
-    # Se obtienen los valores de los atributos para almacenarlos en la lista de organismos
-    for listaOrganismo in listaOrganismos:
-        organismos = listaOrganismo.getElementsByTagName("organismo")
-        for organismo in organismos:
-            codigoOrganismo = organismo.getElementsByTagName("codigo")[0].firstChild.data
-            nombreOrganismo = organismo.getElementsByTagName("nombre")[0].firstChild.data
-            miListaOrganismo.push(codigoOrganismo, nombreOrganismo, listaColores[contador])
-            contador = contador + 1
-
-    # Lista que contendrá la información de las muestras y los organismos vivos
-    miListaMuestras = ListaMuestras()
-
-    # Lista con los datos de las muestras de los organismos
-    for listadoMuestra in listadoMuestras:
-        muestras = listadoMuestra.getElementsByTagName("muestra")
-        for muestra in muestras:
-            codigoMuestra = muestra.getElementsByTagName("codigo")[0].firstChild.data
-            descripcionMuestra = muestra.getElementsByTagName("descripcion")[0].firstChild.data
-            limiteFilas = int(muestra.getElementsByTagName("filas")[0].firstChild.data)
-            limiteColumnas = int(muestra.getElementsByTagName("columnas")[0].firstChild.data)
-            listaMuestraNueva = ListaMuestra(codigoMuestra, descripcionMuestra, limiteFilas, limiteColumnas)
-            listadoCeldasVivas = muestra.getElementsByTagName("listadoCeldasVivas")
-            for listadoCeldaViva in listadoCeldasVivas:
-                celdasVivas = listadoCeldaViva.getElementsByTagName("celdaViva")
-                for celdaViva in celdasVivas:
-                    filaOrganismo = int(celdaViva.getElementsByTagName("fila")[0].firstChild.data)
-                    columnaOrganismo = int(celdaViva.getElementsByTagName("columna")[0].firstChild.data)
-                    codigoOrganismo = celdaViva.getElementsByTagName("codigoOrganismo")[0].firstChild.data
-                    colorOrganismo = miListaOrganismo.devolverColor(codigoOrganismo)
-                    listaMuestraNueva.push(filaOrganismo, columnaOrganismo, codigoOrganismo, colorOrganismo, "BLACK")
-            miListaMuestras.push(listaMuestraNueva)
-
-    miListaOrganismo.imprimirTiposOrganismos()
-    miListaMuestras.imprimirLimitesCuadricula()
-    miListaMuestras.imprimirInformacionMuestras()
-
-except:
-    print("[ERROR]: Existen problemas con el archivo")
+while menuPrincipal:
+    menuSecundario = True
+    try:
+        print("""
+            =============== BIENVENIDO ===============
+            | 1. Cargar archivo                      |
+            | 2. Modificar muestra                   |
+            | 3. Salir                               |
+            ==========================================
+            """)
+        opcionMenuPrincipal = int(input("Ingrese la opción a realizar: "))
+        if opcionMenuPrincipal == 1:
+            print("----- CARGAR ARCHIVO -----")
+            miListaOrganismo, miListaMuestras = leerArchivoXML()
+            print("¡Archivo cargado con éxito!")
+        elif opcionMenuPrincipal == 2:
+            while menuSecundario:
+                print("----- MODIFICAR MUESTRA -----")
+                print("1. Seleccionar muestra")
+                print("2. Ingresar organismo")
+                print("3. Regresar al menú principal")
+                opcionMenuSecundario = int(input("Ingrese la opción a realizar: "))
+                if opcionMenuSecundario == 1:
+                    miListaMuestras.imprimirInformacionMuestras()
+                    codigoMuestra = input("Ingrese el código correspondiente a la muestra a modificar: ")
+                    miMuestra = miListaMuestras.devolverMuestra(codigoMuestra)
+                    if miMuestra != None:
+                        print("Muestra seleccionada: " + str(miMuestra.getCodigo()))
+                        #print(miMuestra.buscarOrganismo(1, 6))
+                        #print(miMuestra.buscarOrganismo(18, 3))
+                        #print(miMuestra.buscarOrganismo(9, 15))
+                    else:
+                        print("La muestra con el código ingresado no existe")
+                elif opcionMenuSecundario == 2:
+                    miListaOrganismo.imprimirTiposOrganismos()
+                    numeroOrganismo = int(input("Ingrese el número correspondiente al organismo a insertar: "))
+                    miOrganismo = miListaOrganismo.devolverOrganismo(numeroOrganismo)
+                    if miOrganismo != None:
+                        print("Organismo seleccionado: " + str(miOrganismo.getCodigo() + " - " + str(miOrganismo.getNombre())))
+                        #miMuestra.buscarCeldasAptasHorizonal(miOrganismo.getCodigo())
+                        miMuestra.buscarCeldasAptasVertical(miOrganismo.getCodigo())
+                    else:
+                        print("La opción ingresada no existe")
+                elif opcionMenuSecundario == 3:
+                    print("Regresando...")
+                    menuSecundario = False
+                else:
+                    print("La opción ingresada no existe")
+        elif opcionMenuPrincipal == 3:
+            print("Saliendo...")
+            menuPrincipal = False
+        else:
+            print("La opción ingresada no existe")
+    except:
+        print("Opción inválida")

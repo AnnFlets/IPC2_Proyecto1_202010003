@@ -35,10 +35,20 @@ class ListaOrganismo:
             auxiliar = auxiliar.getSiguiente()
 
     def imprimirTiposOrganismos(self):
+        contador = 1
         auxiliar = self.cabeza
         while auxiliar != None:
-            print("Código: " + str(auxiliar.getCodigo()))
-            print("Nombre: " + str(auxiliar.getNombre()))
-            print("Color: " + str(auxiliar.getColor()))
-            print("-----------------------------------------------------")
+            print("ORGANISMO #" + str(contador))
+            print(str(auxiliar.getCodigo()) + " - " + str(auxiliar.getNombre()))
             auxiliar = auxiliar.getSiguiente()
+            contador = contador + 1
+
+    def devolverOrganismo(self, numero):
+        contador = 1
+        auxiliar = self.cabeza
+        while auxiliar != None:
+            if contador == numero:
+                return auxiliar
+            auxiliar = auxiliar.getSiguiente()
+            contador = contador + 1
+        return None
